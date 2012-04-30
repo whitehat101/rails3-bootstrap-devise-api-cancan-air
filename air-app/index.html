@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>Restful Air</title>
+	<script type="text/javascript" src="app:/js/AIRAliases.js"></script>
+	<script type="text/javascript" src="app:/js/AIRIntrospector.js"></script>
+	<script type="text/javascript" src="app:/js/jquery-1.7.2.min.js"></script>
+
+	<!-- <link rel="stylesheet" href="app:/mouseover_files/demos.css"> -->
+
+	<script type="text/javascript">
+	$(function() {
+		air.trace( jQuery.fn.jquery );
+		var $log = $("#log");
+
+		$.ajax({
+			url: "http://127.0.0.1:3000/api/users/sign_in.json",
+			type: "POST",
+			data: "login[email]=user@example.com&login[password]=please",
+			success: function(data, textStatus, jqXHR){
+				air.Introspector.Console.log( data.auth_token );
+
+				$log.append( textStatus ).append( " " )
+					.append( data.success ).append( " " )
+					.append( data.email ).append( $("<br/>"));
+
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				$log.append( textStatus ).append( $("<br/>"));
+			}
+		});
+
+
+		// air.navigateToURL( new air.URLRequest("http://www.google.com/") ); // Send User's Browser to
+	});
+	</script>
+</head>
+<body>
+
+
+<div>
+	Console
+</div>
+
+<div id="log">
+</div>
+
+
+</body></html>
